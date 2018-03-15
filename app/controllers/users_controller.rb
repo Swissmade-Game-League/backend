@@ -3,11 +3,11 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users
+    render json: users, :except => [:password, :token, :salt]
   end
 
   def show
-    render json: @user
+   render :json => @user , :except => [:password, :token, :salt]
   end
 
   def create
