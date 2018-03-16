@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.gen_token_and_salt
     if @user.save
-      render json: @user
+      render json: @user, :except => [:password, :token, :salt]
     else
       payload = {
         error: "User not created, "+@user.errors.full_messages.to_sentence,
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
         @user.password_confirmation = @user.password
       end
       if @user.save
-        render json: @user
+        render json: @user, :except => [:password, :token, :salt]
       else
         payload = {
           error: "User not updated, "+@user.errors.full_messages.to_sentence,
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   def destroy
     if @user.destroy
       payload = {
-        error: "User deleted",
+        info: "User deleted",
         status: 200
       }
       render :json => payload, :status => 200
