@@ -1,3 +1,22 @@
+## Home
+
+**Endpoint**: GET - https://api_endpoint.tld/
+
+**Description**: Get app short infos
+
+#### Response
+```
+{
+  "name": "Swiss Game League",
+  "environment": "preproduction",
+  "version": {
+    "number": "1.0",
+    "build_hash": "6be204a6fc0befa8be49efa8618f016cc8a82b37"
+  },
+  "tagline": "Grinding the ladder, You Know"
+}
+```
+
 ## Create user
 
 **Endpoint**: POST - https://api_endpoint.tld/users
@@ -23,6 +42,19 @@
 		"mail": "clement.hampai@cypressxt.net",
 		"birthdate": "1993-01-19"
 	}
+}
+```
+
+#### Response
+```
+{
+  "id": 1,
+  "firstname": "clément",
+  "lastname": "hampaï",
+  "mail": "clement.hampai@cypressxt.net",
+  "birthdate": "1993-01-19",
+  "created_at": "2018-03-17T15:46:35.000Z",
+  "updated_at": "2018-03-17T15:46:35.000Z"
 }
 ```
 
