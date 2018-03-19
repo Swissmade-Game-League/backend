@@ -58,6 +58,44 @@
 }
 ```
 
+## authenticate user
+
+**Endpoint**: POST - https://api_endpoint.tld/authenticate
+
+**Description**: Authenticate a user by mail and password
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "user": {
+    "mail": "clement.hampai@cypressxt.net",
+    "password": "this_is_my_sick_password"
+  }
+}
+```
+
+#### Response
+```
+{
+  "id": 10,
+  "firstname": "clément",
+  "lastname": "hampaï",
+  "mail": "clement.hampai@cypressxt.net",
+  "token": "09150c847bcc22765cfc047c",
+  "birthdate": "1993-01-19",
+  "created_at": "2018-03-19T07:10:19.161Z",
+  "updated_at": "2018-03-19T07:10:19.161Z"
+}
+```
+
 ## Get users
 
 **Endpoint**: GET - https://api_endpoint.tld/users/
@@ -82,9 +120,11 @@
 
 ## Get user
 
-**Endpoint**: GET - https://api_endpoint.tld/users/8
+**Endpoint**: GET - https://api_endpoint.tld/users/user_id
 
 **Description**: Get a user by id
+
+**Parameters**: `user_id`: needed user's id
 
 
 #### Response
@@ -102,9 +142,12 @@
 
 ## Update user
 
-**Endpoint**: PATCH - https://api_endpoint.tld/users/8
+**Endpoint**: PATCH - https://api_endpoint.tld/users/user_id
 
 **Description**: Update user's properties by user id
+
+**Parameters**: `user_id`: needed user's id
+
 
 #### Header
 ```
@@ -117,14 +160,15 @@
 #### Body
 ```
 {
-	"user": {
-		"firstname": "Clément",
-		"lastname": "Hampaï",
-		"password": "this_is_my_sick_password",
-		"password_confirmation": "this_is_my_sick_password",
-		"mail": "clement.hampai2@cypressxt.net",
-		"birthdate": "1993-01-19"
-	}
+  "user": {
+    "firstname": "Cl\u00e9ment",
+    "lastname": "Hampa\u00ef",
+    "mail": "clement.hampai@cypressxt.net",
+    "password": "this_is_my_new_sick_password",
+    "password_confirmation": "this_is_my_new_sick_password",
+    "birthdate": "1993-01-19",
+    "token": "5cc5e4224c5d0c006eda75fc"
+  }
 }
 ```
 
@@ -143,12 +187,24 @@
 
 ## Delete user
 
-**Endpoint**: DELETE - https://api_endpoint.tld/users/8
+**Endpoint**: DELETE - https://api_endpoint.tld/users/user_id
 
 **Description**: Delete a user by id
 
+**Parameters**: `user_id`: needed user's id
+
+
 
 #### Body
+```
+{
+  "user": {
+    "token": "09150c847bcc22765cfc047c"
+  }
+}
+```
+
+#### Response
 ```
 {
   "info": "User deleted",
