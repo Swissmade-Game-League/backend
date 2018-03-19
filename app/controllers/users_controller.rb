@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :user_must_exist, except: [:index, :create]
+  before_action :users_token_must_be_valid, only: [:update, :delete]
 
   def index
     users = User.all
@@ -18,9 +19,9 @@ class UsersController < ApplicationController
     else
       payload = {
         error: "User not created, "+@user.errors.full_messages.to_sentence,
-        status: 500
+        status: 400
       }
-      render :json => payload, :status => 500
+      render :json => payload, :status => 400
     end
   end
 
@@ -40,16 +41,16 @@ class UsersController < ApplicationController
       else
         payload = {
           error: "User not updated, "+@user.errors.full_messages.to_sentence,
-          status: 500
+          status: 400
         }
-        render :json => payload, :status => 500
+        render :json => payload, :status => 400
       end
     else
       payload = {
         error: "User not updated, "+@user.errors.full_messages.to_sentence,
-        status: 500
+        status: 400
       }
-      render :json => payload, :status => 500
+      render :json => payload, :status => 400
     end
   end
 
@@ -63,14 +64,29 @@ class UsersController < ApplicationController
     else
       payload = {
         error: "User not updated, "+@user.errors.full_messages.to_sentence,
-        status: 500
+        status: 400
       }
-      render :json => payload, :status => 500
+      render :json => payload, :status => 400
+    end
+  end
+
+  def authenticate
+    mail = user_params[:mail]
+    password = user_params[:password]
+    user = User.find_by(mail: mail)
+    if user && user.authenticate(password)
+      render json: @user, :except => [:password, :salt]
+    else
+      payload = {
+        error: "Wrong user's credentials",
+        status: 400
+      }
+      render :json => payload, :status => 400
     end
   end
 
   def user_must_exist
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id]) || User.find_by(mail: user_params[:mail])
     if !@user
       payload = {
         error: "User not found",
@@ -78,6 +94,10 @@ class UsersController < ApplicationController
       }
       render :json => payload, :status => 404
     end
+  end
+
+  def users_token_must_be_valid
+
   end
 
   def user_params

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   ## Users
   resources :users
+  post 'authenticate'    => "users#authenticate"
   # -------------
 
 end
