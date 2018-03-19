@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :user_must_exist, except: [:index, :create]
-  before_action :users_token_must_be_valid, only: [:update, :delete]
+  before_action :users_token_must_be_valid, only: [:update, :destroy]
 
   def index
     users = User.all
@@ -97,11 +97,17 @@ class UsersController < ApplicationController
   end
 
   def users_token_must_be_valid
-
+    if @user && @user.token != user_params[:token]
+      payload = {
+        error: "Wrong user's credentials, check the user's token using the authenticate method. If you updated a user, you need a new authentication.",
+        status: 400
+      }
+      render :json => payload, :status => 400
+    end
   end
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :mail, :password, :password_confirmation, :birthdate)
+    params.require(:user).permit(:firstname, :lastname, :mail, :password, :password_confirmation, :birthdate, :token)
   end
 
 end
