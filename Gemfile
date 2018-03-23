@@ -43,7 +43,7 @@ group :development do
 end
 
 group :preproduction, :production do
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.3.18'
   gem 'elastic-apm', :git => 'https://github.com/elastic/apm-agent-ruby.git'
 end
 
