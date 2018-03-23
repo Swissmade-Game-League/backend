@@ -44,6 +44,7 @@ end
 
 group :preproduction, :production do
   gem 'mysql2'
+  gem 'elastic-apm', :git => 'https://github.com/elastic/apm-agent-ruby.git'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -22,7 +22,7 @@ set :deploy_to, "/var/www/swissmade-game-league-backend"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", "config/secrets.yml"
-append :linked_files,'config/database.yml', 'config/secrets.yml'
+append :linked_files,'config/database.yml', 'config/secrets.yml', "config/elastic_apm.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -47,6 +47,17 @@ namespace :deploy do
       #   execute :rake, 'cache:clear'
       # end
       execute :bundle, 'exec cap puma:restart'
+    end
+  end
+end
+
+desc 'Runs rake db:seed'
+task :seed do
+  on primary fetch(:migration_role) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, "db:seed"
+      end
     end
   end
 end

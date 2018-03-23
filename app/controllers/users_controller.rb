@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.except(:gender))
+    @user.gender = Gender.find_by(name: user_params[:gender])
     @user.gen_token_and_salt
     if @user.save
       render json: @user, :except => [:password, :token, :salt]
@@ -27,7 +28,10 @@ class UsersController < ApplicationController
 
   def update
     old_mail = @user.mail
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(user_params.except(:gender))
+      if user_params.has_key?(:gender)
+        @user.gender = Gender.find_by(name: user_params[:gender])
+      end
       if user_params.has_key?(:password) && user_params.has_key?(:password_confirmation)
         @user.password = user_params["password"]
         @user.password_confirmation = user_params["password_confirmation"]
@@ -107,7 +111,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :mail, :password, :password_confirmation, :birthdate, :token)
+    params.require(:user).permit(:firstname, :lastname, :mail, :password, :password_confirmation, :birthdate, :token, :gender)
   end
 
 end

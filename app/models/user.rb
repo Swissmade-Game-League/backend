@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Validations
   validates :firstname, :lastname, :mail, :birthdate, :password, :password_confirmation, :salt, presence: true
+  validates :gender, presence: true
   validates :password, confirmation: true
   validates :password, :length => { minimum: 7 }
   validates :mail, uniqueness: true
@@ -10,6 +11,10 @@ class User < ApplicationRecord
   before_create :gen_token_and_salt
   before_create :change_password
   before_save :set_lowercase
+  # -----
+
+  # Relations
+  belongs_to :gender
   # -----
 
   def set_lowercase

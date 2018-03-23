@@ -7,7 +7,7 @@ class HomeController < ApplicationController
         number: "1.0",
         build_hash: get_revision
       },
-      tagline: "Grinding the ladder, You Know"
+      tagline: "Grinding the ladder, you know"
     }
     render json: payload
   end

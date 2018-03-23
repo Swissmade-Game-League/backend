@@ -40,7 +40,8 @@
 		"password": "this_is_my_sick_password",
 		"password_confirmation": "this_is_my_sick_password",
 		"mail": "clement.hampai@cypressxt.net",
-		"birthdate": "1993-01-19"
+		"birthdate": "1993-01-19",
+    "gender": "male"
 	}
 }
 ```
@@ -54,7 +55,8 @@
   "mail": "clement.hampai@cypressxt.net",
   "birthdate": "1993-01-19",
   "created_at": "2018-03-17T15:46:35.000Z",
-  "updated_at": "2018-03-17T15:46:35.000Z"
+  "updated_at": "2018-03-17T15:46:35.000Z",
+  "gender_id": 1
 }
 ```
 
@@ -91,6 +93,7 @@
   "mail": "clement.hampai@cypressxt.net",
   "token": "09150c847bcc22765cfc047c",
   "birthdate": "1993-01-19",
+  "gender_id": 1,
   "created_at": "2018-03-19T07:10:19.161Z",
   "updated_at": "2018-03-19T07:10:19.161Z"
 }
@@ -112,6 +115,7 @@
     "lastname": "hampaï",
     "mail": "clement.hampai@cypressxt.net",
     "birthdate": "1993-01-19",
+    "gender_id": 1,
     "created_at": "2018-03-16T07:11:30.480Z",
     "updated_at": "2018-03-16T07:11:30.480Z"
   }
@@ -135,6 +139,7 @@
   "lastname": "hampaï",
   "mail": "clement.hampai@cypressxt.net",
   "birthdate": "1993-01-19",
+  "gender_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.480Z"
 }
@@ -161,12 +166,13 @@
 ```
 {
   "user": {
-    "firstname": "Cl\u00e9ment",
-    "lastname": "Hampa\u00ef",
+    "firstname": "Clément",
+    "lastname": "Hampaï",
     "mail": "clement.hampai@cypressxt.net",
     "password": "this_is_my_new_sick_password",
     "password_confirmation": "this_is_my_new_sick_password",
     "birthdate": "1993-01-19",
+    "gender": "male",
     "token": "5cc5e4224c5d0c006eda75fc"
   }
 }
@@ -180,6 +186,7 @@
   "firstname": "clément",
   "lastname": "hampaï",
   "birthdate": "1993-01-19",
+  "gender_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.939Z"
 }
