@@ -41,7 +41,7 @@
 		"password_confirmation": "this_is_my_sick_password",
 		"mail": "clement.hampai@cypressxt.net",
 		"birthdate": "1993-01-19",
-    "gender": "male"
+		"gender": "male"
 	}
 }
 ```
