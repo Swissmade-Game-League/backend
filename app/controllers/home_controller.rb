@@ -18,7 +18,7 @@ class HomeController < ApplicationController
   def get_revision(length=1000)
     if File.exist?(Rails.root.join('REVISION'))
        revision = File.read(Rails.root.join('REVISION'))[0...length]
-       return revision.tr('\n', '')
+       return revision.delete!("\n")
     else
       return "unknown 😳"
     end

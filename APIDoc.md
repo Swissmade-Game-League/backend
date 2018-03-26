@@ -1,4 +1,4 @@
-## Home
+# Home
 
 **Endpoint**: GET - https://api_endpoint.tld/
 
@@ -7,15 +7,18 @@
 #### Response
 ```
 {
-  "name": "Swiss Game League",
-  "environment": "preproduction",
+  "name": "Swiss Made Game League",
+  "environment": "development",
+  "repo": "https://github.com/Swissmade-Game-League/backend",
   "version": {
     "number": "1.0",
-    "build_hash": "6be204a6fc0befa8be49efa8618f016cc8a82b37"
+    "build_hash": "3b68375a4bab411f021b88ec07d8bc310b132d9e"
   },
-  "tagline": "Grinding the ladder, You Know"
+  "tagline": "Grinding the ladder, you know"
 }
 ```
+
+# Users
 
 ## Create user
 
@@ -39,7 +42,7 @@
 		"lastname": "Hampaï",
 		"password": "this_is_my_sick_password",
 		"password_confirmation": "this_is_my_sick_password",
-		"mail": "clement.hampai@cypressxt.net",
+		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
 		"gender": "male"
 	}
@@ -52,7 +55,7 @@
   "id": 1,
   "firstname": "clément",
   "lastname": "hampaï",
-  "mail": "clement.hampai@cypressxt.net",
+  "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "created_at": "2018-03-17T15:46:35.000Z",
   "updated_at": "2018-03-17T15:46:35.000Z",
@@ -78,7 +81,7 @@
 ```
 {
   "user": {
-    "mail": "clement.hampai@cypressxt.net",
+    "mail": "email@example.com",
     "password": "this_is_my_sick_password"
   }
 }
@@ -90,7 +93,7 @@
   "id": 10,
   "firstname": "clément",
   "lastname": "hampaï",
-  "mail": "clement.hampai@cypressxt.net",
+  "mail": "email@example.com",
   "token": "09150c847bcc22765cfc047c",
   "birthdate": "1993-01-19",
   "gender_id": 1,
@@ -113,7 +116,7 @@
     "id": 8,
     "firstname": "clément",
     "lastname": "hampaï",
-    "mail": "clement.hampai@cypressxt.net",
+    "mail": "email@example.com",
     "birthdate": "1993-01-19",
     "gender_id": 1,
     "created_at": "2018-03-16T07:11:30.480Z",
@@ -137,7 +140,7 @@
   "id": 8,
   "firstname": "clément",
   "lastname": "hampaï",
-  "mail": "clement.hampai@cypressxt.net",
+  "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "gender_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
@@ -168,7 +171,7 @@
   "user": {
     "firstname": "Clément",
     "lastname": "Hampaï",
-    "mail": "clement.hampai@cypressxt.net",
+    "mail": "email@example.com",
     "password": "this_is_my_new_sick_password",
     "password_confirmation": "this_is_my_new_sick_password",
     "birthdate": "1993-01-19",
@@ -181,7 +184,7 @@
 #### Response
 ```
 {
-  "mail": "clement.hampai2@cypressxt.net",
+  "mail": "email2@example.com",
   "id": 8,
   "firstname": "clément",
   "lastname": "hampaï",
@@ -216,5 +219,76 @@
 {
   "info": "User deleted",
   "status": 200
+}
+```
+
+# Genders
+
+## Get genders
+
+**Endpoint**: GET - https://api_endpoint.tld/genders/
+
+**Description**: Get all genders
+
+
+#### Response
+```
+[
+  {
+    "id": 1,
+    "name": "male",
+    "created_at": "2018-03-19T10:24:19.906Z",
+    "updated_at": "2018-03-19T10:24:19.906Z"
+  },
+  {
+    "id": 2,
+    "name": "female",
+    "created_at": "2018-03-19T10:24:19.924Z",
+    "updated_at": "2018-03-19T10:24:19.924Z"
+  },
+  {
+    "id": 3,
+    "name": "other",
+    "created_at": "2018-03-19T10:24:19.939Z",
+    "updated_at": "2018-03-19T10:24:19.939Z"
+  }
+]
+```
+
+## Get gender
+
+**Endpoint**: GET - https://api_endpoint.tld/genders/gender_id
+
+**Description**: Get a gender by id
+
+**Parameters**: `gender_id`: needed gender's id
+
+
+#### Response
+```
+{
+  "id": 2,
+  "name": "female",
+  "created_at": "2018-03-19T10:24:19.924Z",
+  "updated_at": "2018-03-19T10:24:19.924Z"
+}
+```
+
+## Get gender by name
+
+**Endpoint**: GET - https://api_endpoint.tld/genders/by_name/gender_name
+
+**Description**: Get a gender by name
+
+**Parameters**: `gender_name`: needed gender's name
+
+
+#### Response
+```
+{
+  "id": 2,
+  "name": "female",
+  "created_at": "2018-03-19T10:24:19.924Z",
+  "updated_at": "2018-03-19T10:24:19.924Z"
 }
 ```
