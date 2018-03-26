@@ -1,8 +1,9 @@
 class HomeController < ApplicationController
   def index
     payload = {
-      name: "Swiss Game League",
+      name: "Swiss Made Game League",
       environment: Rails.env,
+      repo: "https://github.com/Swissmade-Game-League/backend",
       version: {
         number: "1.0",
         build_hash: get_revision
@@ -16,7 +17,8 @@ class HomeController < ApplicationController
 
   def get_revision(length=1000)
     if File.exist?(Rails.root.join('REVISION'))
-      return File.read(Rails.root.join('REVISION'))[0...length]
+       revision = File.read(Rails.root.join('REVISION'))[0...length]
+       return revision.tr('\n', '')
     else
       return "unknown 😳"
     end

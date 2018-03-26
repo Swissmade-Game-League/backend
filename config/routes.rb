@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   ## Users
   resources :users
-  post 'authenticate'    => "users#authenticate"
+  post 'authenticate'     => "users#authenticate"
+  # -------------
+
+  ## Users
+  resources :genders, only: [:index, :show]
+  get 'genders/by_name/:name'     => "genders#get_gender_by_name",  as: :get_gender_by_name
   # -------------
 
 end
