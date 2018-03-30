@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     payload = {
-      name: "Swiss Made Game League",
+      name: "Swiss Made Games League",
       environment: Rails.env,
       repo: "https://github.com/Swissmade-Game-League/backend",
       version: {
