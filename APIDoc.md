@@ -45,20 +45,20 @@
 		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
 		"gender": "male",
-        "address": {
-          "number": 4,
-          "street": "rue du tryhard",
-          "locality": {
-            "name": "Genève",
-            "postal_code": "1202"
-          },
-          "state": {
-            "name": "Genève"
-          },
-          "country": {
-            "name": "Switzerland"
-          }
-        }
+		"address": {
+			"number": 4,
+			"street": "rue du tryhard",
+			"locality": {
+				"name": "Genève",
+				"postal_code": "1202"
+			},
+			"state": {
+				"name": "Genève"
+			},
+			"country": {
+				"name": "Switzerland"
+			}
+		}
 	}
 }
 ```

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
                                                 "locality"=>locality
                                               )
     state.country = country
-    locality.state = state                                          
+    locality.state = state
     address.locality = locality
     @user.address = address
     @user.gen_token_and_salt
