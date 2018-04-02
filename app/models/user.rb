@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Validations
   validates :firstname, :lastname, :mail, :birthdate, :password, :password_confirmation, :salt, presence: true
-  validates :gender, presence: true
+  validates :gender, :address, presence: true
   validates :password, confirmation: true
   validates :password, :length => { minimum: 7 }
   validates :mail, uniqueness: true
@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   # Relations
   belongs_to :gender
+  belongs_to :address
   # -----
 
   def set_lowercase

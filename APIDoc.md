@@ -44,7 +44,21 @@
 		"password_confirmation": "this_is_my_sick_password",
 		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
-		"gender": "male"
+		"gender": "male",
+        "address": {
+          "number": 4,
+          "street": "rue du tryhard",
+          "locality": {
+            "name": "Genève",
+            "postal_code": "1202"
+          },
+          "state": {
+            "name": "Genève"
+          },
+          "country": {
+            "name": "Switzerland"
+          }
+        }
 	}
 }
 ```
@@ -59,7 +73,8 @@
   "birthdate": "1993-01-19",
   "created_at": "2018-03-17T15:46:35.000Z",
   "updated_at": "2018-03-17T15:46:35.000Z",
-  "gender_id": 1
+  "gender_id": 1,
+  "address_id": 1
 }
 ```
 
@@ -97,6 +112,7 @@
   "token": "09150c847bcc22765cfc047c",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "address_id": 1,
   "created_at": "2018-03-19T07:10:19.161Z",
   "updated_at": "2018-03-19T07:10:19.161Z"
 }
@@ -119,6 +135,7 @@
     "mail": "email@example.com",
     "birthdate": "1993-01-19",
     "gender_id": 1,
+    "address_id": 1,
     "created_at": "2018-03-16T07:11:30.480Z",
     "updated_at": "2018-03-16T07:11:30.480Z"
   }
@@ -143,6 +160,7 @@
   "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.480Z"
 }
@@ -190,6 +208,7 @@
   "lastname": "hampaï",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.939Z"
 }
