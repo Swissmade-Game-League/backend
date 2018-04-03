@@ -13,4 +13,12 @@ Rails.application.routes.draw do
   get 'genders/by_name/:name'     => "genders#get_gender_by_name",  as: :get_gender_by_name
   # -------------
 
+  ## Addresses
+  #resources :addresses, only: [:show]
+  # -------------
+
+  ## Payments
+  resources :payments, only: [:create]
+  # -------------
+
 end

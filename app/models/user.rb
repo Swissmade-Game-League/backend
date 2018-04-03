@@ -16,6 +16,7 @@ class User < ApplicationRecord
   # Relations
   belongs_to :gender
   belongs_to :address
+  has_many :payments
   # -----
 
   def set_lowercase

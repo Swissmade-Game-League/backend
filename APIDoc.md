@@ -318,3 +318,91 @@
   "updated_at": "2018-03-19T10:24:19.924Z"
 }
 ```
+
+# Payment
+
+## Create a cash payment
+
+**Endpoint**: POST - https://api_endpoint.tld/payments
+
+**Description**: Create a new cash payment
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "payment": {
+    "user_id": "13",
+    "user_token": "1850bd1654a7291292873946",
+    "amount": "12"
+  }
+}
+```
+
+#### Response
+```
+{
+  "message": "Thanks, your payment is waiting for validation. This process could take some days.",
+  "payment": {
+    "id": 9,
+    "amount": 12.0,
+    "paid": false,
+    "token": "ed7f8d69756af97ef99ce29bc468b7fde200dfb2dcb114eb",
+    "user_id": 13,
+    "created_at": "2018-04-03T22:15:30.900Z",
+    "updated_at": "2018-04-03T22:15:30.923Z"
+  },
+  "status": 200
+}
+```
+
+
+## Create a credit card payment
+
+**Endpoint**: POST - https://api_endpoint.tld/payments
+
+**Description**: Create a new cash payment
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "payment": {
+    "user_id": "13",
+    "user_token": "1850bd1654a7291292873946",
+    "amount": "12",
+    "stripeToken": "tok_1CCxaRLZISEaaGqL0Vgy12AF"
+  }
+}
+```
+
+#### Response
+```
+{
+  "message": "You're payment has been validated",
+  "payment": {
+    "id": 18,
+    "amount": 12.0,
+    "paid": true,
+    "token": "7bc3b8d7c59f7a9888b209f796e6e3e09ffe17977145e0e7",
+    "user_id": 13,
+    "created_at": "2018-04-03T22:37:04.188Z",
+    "updated_at": "2018-04-03T22:37:08.125Z"
+  },
+  "status": 200
+}
+```

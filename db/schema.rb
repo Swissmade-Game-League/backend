@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403172822) do
+ActiveRecord::Schema.define(version: 20180403211142) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20180403172822) do
     t.index ["state_id"], name: "index_localities_on_state_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.float "amount"
+    t.boolean "paid"
+    t.string "token"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
   create_table "states", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -63,6 +73,7 @@ ActiveRecord::Schema.define(version: 20180403172822) do
     t.integer "gender_id"
     t.integer "address_id"
     t.string "nickname"
+    t.string "remote_id"
     t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["gender_id"], name: "index_users_on_gender_id"
   end

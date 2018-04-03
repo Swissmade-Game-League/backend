@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       render json: @user, :except => [:password, :token, :salt]
     else
       payload = {
-        error: "User not created, "+@user.errors.full_messages.to_sentence+locality.errors.full_messages.to_sentence+address.errors.full_messages.to_sentence+state.errors.full_messages.to_sentence+country.errors.full_messages.to_sentence,
+        message: "User not created, "+@user.errors.full_messages.to_sentence+locality.errors.full_messages.to_sentence+address.errors.full_messages.to_sentence+state.errors.full_messages.to_sentence+country.errors.full_messages.to_sentence,
         status: 400
       }
       render :json => payload, :status => 400
@@ -61,14 +61,14 @@ class UsersController < ApplicationController
         render json: @user, :except => [:password, :token, :salt]
       else
         payload = {
-          error: "User not updated, "+@user.errors.full_messages.to_sentence,
+          message: "User not updated, "+@user.errors.full_messages.to_sentence,
           status: 400
         }
         render :json => payload, :status => 400
       end
     else
       payload = {
-        error: "User not updated, "+@user.errors.full_messages.to_sentence,
+        message: "User not updated, "+@user.errors.full_messages.to_sentence,
         status: 400
       }
       render :json => payload, :status => 400
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
       render :json => payload, :status => 200
     else
       payload = {
-        error: "User not updated, "+@user.errors.full_messages.to_sentence,
+        message: "User not updated, "+@user.errors.full_messages.to_sentence,
         status: 400
       }
       render :json => payload, :status => 400
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
       render json: @user, :except => [:password, :salt]
     else
       payload = {
-        error: "Wrong user's credentials",
+        message: "Wrong user's credentials",
         status: 400
       }
       render :json => payload, :status => 400
@@ -112,7 +112,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id]) || User.find_by(mail: user_params[:mail])
     if !@user
       payload = {
-        error: "User not found",
+        message: "User not found",
         status: 404
       }
       render :json => payload, :status => 404
@@ -122,17 +122,17 @@ class UsersController < ApplicationController
   def users_token_must_be_valid
     if @user && @user.token != user_params[:token]
       payload = {
-        error: "Wrong user's credentials, check the user's token using the authenticate method. If you updated a user, you need a new authentication.",
-        status: 400
+        message: "Wrong user's credentials, check the user's token using the authenticate method. If you updated a user, you need a new authentication.",
+        status: 403
       }
-      render :json => payload, :status => 400
+      render :json => payload, :status => 403
     end
   end
 
   def check_address
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:street) || !user_params[:address].has_key?(:number)
        payload = {
-         error: "missing or bad user's address",
+         message: "missing or bad user's address",
          status: 400
        }
        render :json => payload, :status => 400
@@ -142,7 +142,7 @@ class UsersController < ApplicationController
   def check_locality
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:locality) || !user_params[:address][:locality].has_key?(:name) || !user_params[:address][:locality].has_key?(:postal_code)
        payload = {
-         error: "missing or bad user's address locality",
+         message: "missing or bad user's address locality",
          status: 400
        }
        render :json => payload, :status => 400
@@ -152,7 +152,7 @@ class UsersController < ApplicationController
   def check_state
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:state) || !user_params[:address][:state].has_key?(:name)
        payload = {
-         error: "missing or bad user's address state",
+         message: "missing or bad user's address state",
          status: 400
        }
        render :json => payload, :status => 400
@@ -162,7 +162,7 @@ class UsersController < ApplicationController
   def check_country
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:country) || !user_params[:address][:country].has_key?(:name)
        payload = {
-         error: "missing or bad user's address country",
+         message: "missing or bad user's address country",
          status: 400
        }
        render :json => payload, :status => 400
