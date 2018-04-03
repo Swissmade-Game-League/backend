@@ -319,7 +319,7 @@
 }
 ```
 
-# Payment
+# Payments
 
 ## Create a cash payment
 
