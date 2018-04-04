@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
     payment = Payment.new
     payment.user = @user
     payment.amount = payment_params[:amount]
-    if payment.save
+    if payment.save && payment.get_first_unassigned_product != nil
       if payment_params.has_key?(:stripeToken)
         begin
           customer = nil
@@ -82,10 +82,17 @@ class PaymentsController < ApplicationController
         }
       end
     else
-      payload = {
-        message: "An error occurred during the payment process. Don't worry, you didn't paid anything. "+payment.errors.full_messages.to_sentence,
-        status: 400
-      }
+      if payment.get_first_unassigned_product == nil
+        payload = {
+          message: "Product keys out of stock. Don't worry, you didn't paid anything. ",
+          status: 400
+        }
+      else
+        payload = {
+          message: "An error occurred during the payment process. Don't worry, you didn't paid anything. "+payment.errors.full_messages.to_sentence,
+          status: 400
+        }
+      end
     end
     render :json => payload, :status => payload[:status]
   end
