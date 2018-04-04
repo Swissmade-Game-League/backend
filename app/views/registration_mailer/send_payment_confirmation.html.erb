@@ -20,11 +20,49 @@
                   You recently purchase a SMGL league pass, right 😃 ? <br/>
                 </td>
               </tr>
-              <tr>
-                <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="left" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 1em;">
-                </td>
-              </tr>
-              <tr>
+            <tr>
+              <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="left" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 1em;">
+              </td>
+            </tr>
+            <tr>
+              <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="left" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
+                Here is your inscription receipt.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table cellspacing="0" width="100%" class="row" align="center" style="font:18px/20px Arial, Helvetica, sans-serif; color:#292c34; padding:0 0 24px;">
+                  <% if @payment.user %>
+                  <tr>
+                    <td>
+                      Name:
+                    </td>
+                    <td>
+                      <%= @payment.user.firstname.capitalize %> <%= @payment.user.lastname.capitalize %>
+                    </td>
+                    <td class="expander"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Amount:
+                    </td>
+                    <td>
+                      <%= number_to_currency(@payment.amount, unit: "CHF ") %>
+                    </td>
+                    <td class="expander"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Token:
+                    </td>
+                    <td>
+                      <%= @payment.token %>
+                    </td>
+                    <td class="expander"></td>
+                  </tr>
+                  <% end %>
+                </table>
+              </td>
             </tr>
             <tr>
               <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="left" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 1em;">
@@ -32,7 +70,12 @@
             </tr>
             <tr>
               <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="left" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                You will shortly receive your Retimed beta key.
+                You can find bellow your Retimed beta key:
+              </td>
+            </tr>
+            <tr>
+              <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="center" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:1em; background-color:#c5c6c9;">
+                <%= @payment.token %>
               </td>
             </tr>
             <tr>
@@ -64,8 +107,8 @@
       </tr>
       <tr style="text-align:center; margin-bottom:4em; background-color:#e3e3e3;">
         <td style="padding-bottom:1em;">
-          <%= link_to 'https://ggc.ch' do %>
-          <%= image_tag "ggc_web_color", height: "32" %>
+          <%= link_to 'https://smgl.ch' do %>
+          <%= image_tag "/assets/images/smgl_logo.png", height: "32" %>
           <% end %>
         </td>
       </tr>
@@ -78,22 +121,22 @@
                 <tr>
                   <td style="padding-bottom:1em;">
                     <%= link_to 'https://www.facebook.com/SMGLeague/' do %>
-                    <%= image_tag "fb", height: "32" %>
+                    <%= image_tag "/assets/images/fb.png", height: "32" %>
                     <% end %>
                   </td>
                   <td style="padding-bottom:1em;">
                     <%= link_to 'https://twitter.com/SMGLeague' do %>
-                    <%= image_tag "tw", height: "32" %>
+                    <%= image_tag "/assets/images/tw.png", height: "32" %>
                     <% end %>
                   </td>
                   <td style="padding-bottom:1em;">
                     <%= link_to 'https://github.com/Swissmade-Game-League' do %>
-                    <%= image_tag "gh", height: "32" %>
+                    <%= image_tag "/assets/images/gh.png", height: "32" %>
                     <% end %>
                   </td>
                   <td style="padding-bottom:1em;">
                     <%= link_to 'https://www.youtube.com/channel/UCNSrfmrZB-SCx8HA9YOIizA' do %>
-                    <%= image_tag "yt", height: "32" %>
+                    <%= image_tag "/assets/images/yt.png", height: "32" %>
                     <% end %>
                   </td>
                 </tr>

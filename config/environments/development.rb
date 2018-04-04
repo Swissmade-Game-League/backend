@@ -49,8 +49,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'http://192.168.97.133:3000' }
   config.action_controller.default_url_options = { :host => 'http://192.168.97.133:3000' }
-  config.action_controller.asset_host = 'http://192.168.97.133:3000'
-  config.action_mailer.asset_host = 'http://192.168.97.133:3000'
+  config.action_controller.asset_host = "http://192.168.97.133:3000"
+  config.action_mailer.asset_host = "http://192.168.97.133:3000"
   config.action_mailer.smtp_settings = {
     :address   => Rails.application.secrets.mail_smtp_srv,
     :port      => Rails.application.secrets.mail_smtp_port,
