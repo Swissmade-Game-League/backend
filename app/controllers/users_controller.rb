@@ -114,7 +114,7 @@ class UsersController < ApplicationController
   private
 
   def user_must_exist
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id]) || (params.has_key?(:user) && User.find_by(mail: user_params[:mail]))
     if !@user
       payload = {
         message: "User not found",
