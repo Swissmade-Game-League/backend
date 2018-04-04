@@ -46,6 +46,8 @@
 		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
 		"gender": "male",
+		"team_name": null,
+		"dev": false,
 		"address": {
 			"number": 4,
 			"street": "rue du tryhard",
@@ -76,6 +78,8 @@
   "created_at": "2018-03-17T15:46:35.000Z",
   "updated_at": "2018-03-17T15:46:35.000Z",
   "gender_id": 1,
+  "team_name": null,
+  "dev": false,
   "address_id": 1
 }
 ```
@@ -115,6 +119,8 @@
   "token": "09150c847bcc22765cfc047c",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "team_name": null,
+  "dev": false,
   "address_id": 1,
   "created_at": "2018-03-19T07:10:19.161Z",
   "updated_at": "2018-03-19T07:10:19.161Z"
@@ -139,6 +145,8 @@
     "mail": "email@example.com",
     "birthdate": "1993-01-19",
     "gender_id": 1,
+    "team_name": null,
+    "dev": false,
     "address_id": 1,
     "created_at": "2018-03-16T07:11:30.480Z",
     "updated_at": "2018-03-16T07:11:30.480Z"
@@ -165,6 +173,8 @@
   "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "team_name": null,
+  "dev": false,
   "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.480Z"
@@ -200,6 +210,8 @@
     "password_confirmation": "this_is_my_new_sick_password",
     "birthdate": "1993-01-19",
     "gender": "male",
+    "team_name": null,
+    "dev": false,
     "token": "5cc5e4224c5d0c006eda75fc"
   }
 }
@@ -215,6 +227,8 @@
   "nickname": "CypressXt",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "team_name": null,
+  "dev": false,
   "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.939Z"
