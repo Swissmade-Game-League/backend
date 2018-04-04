@@ -27,7 +27,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -46,4 +46,17 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.reload_classes_only_on_change = false
+
+  config.action_mailer.default_url_options = { :host => 'http://192.168.97.133:3000' }
+  config.action_controller.default_url_options = { :host => 'http://192.168.97.133:3000' }
+  config.action_controller.asset_host = 'http://192.168.97.133:3000'
+  config.action_mailer.asset_host = 'http://192.168.97.133:3000'
+  config.action_mailer.smtp_settings = {
+    :address   => Rails.application.secrets.mail_smtp_srv,
+    :port      => Rails.application.secrets.mail_smtp_port,
+    :user_name => Rails.application.secrets.mail_user,
+    :password  => Rails.application.secrets.mail_user_pwd,
+    :authentication => 'plain',
+    :enable_starttls_auto => true
+  }
 end
