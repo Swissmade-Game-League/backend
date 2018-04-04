@@ -4,8 +4,13 @@ class UsersController < ApplicationController
   before_action :check_address, :check_locality, :check_state, :check_country, only: [:create]
 
   def index
-    users = User.all
-    render json: users, :except => [:password, :token, :salt]
+    #users = User.all
+    #render json: users, :except => [:password, :token, :salt]
+    payload = {
+      message: "Temporarily disabled, brb soon",
+      status: 503
+    }
+    render :json => payload, :status => payload[:status]
   end
 
   def show
@@ -39,7 +44,7 @@ class UsersController < ApplicationController
         message: "User not created, "+@user.errors.full_messages.to_sentence+locality.errors.full_messages.to_sentence+address.errors.full_messages.to_sentence+state.errors.full_messages.to_sentence+country.errors.full_messages.to_sentence,
         status: 400
       }
-      render :json => payload, :status => 400
+      render :json => payload, :status => payload[:status]
     end
   end
 
@@ -64,14 +69,14 @@ class UsersController < ApplicationController
           message: "User not updated, "+@user.errors.full_messages.to_sentence,
           status: 400
         }
-        render :json => payload, :status => 400
+        render :json => payload, :status => payload[:status]
       end
     else
       payload = {
         message: "User not updated, "+@user.errors.full_messages.to_sentence,
         status: 400
       }
-      render :json => payload, :status => 400
+      render :json => payload, :status => payload[:status]
     end
   end
 
@@ -81,13 +86,13 @@ class UsersController < ApplicationController
         info: "User deleted",
         status: 200
       }
-      render :json => payload, :status => 200
+      render :json => payload, :status => payload[:status]
     else
       payload = {
         message: "User not updated, "+@user.errors.full_messages.to_sentence,
         status: 400
       }
-      render :json => payload, :status => 400
+      render :json => payload, :status => payload[:status]
     end
   end
 
@@ -102,7 +107,7 @@ class UsersController < ApplicationController
         message: "Wrong user's credentials",
         status: 400
       }
-      render :json => payload, :status => 400
+      render :json => payload, :status => payload[:status]
     end
   end
 
@@ -115,7 +120,7 @@ class UsersController < ApplicationController
         message: "User not found",
         status: 404
       }
-      render :json => payload, :status => 404
+      render :json => payload, :status => payload[:status]
     end
   end
 
@@ -125,7 +130,7 @@ class UsersController < ApplicationController
         message: "Wrong user's credentials, check the user's token using the authenticate method. If you updated a user, you need a new authentication.",
         status: 403
       }
-      render :json => payload, :status => 403
+      render :json => payload, :status => payload[:status]
     end
   end
 
@@ -135,7 +140,7 @@ class UsersController < ApplicationController
          message: "missing or bad user's address",
          status: 400
        }
-       render :json => payload, :status => 400
+       render :json => payload, :status => payload[:status]
     end
   end
 
@@ -145,7 +150,7 @@ class UsersController < ApplicationController
          message: "missing or bad user's address locality",
          status: 400
        }
-       render :json => payload, :status => 400
+       render :json => payload, :status => payload[:status]
     end
   end
 
@@ -155,7 +160,7 @@ class UsersController < ApplicationController
          message: "missing or bad user's address state",
          status: 400
        }
-       render :json => payload, :status => 400
+       render :json => payload, :status => payload[:status]
     end
   end
 
@@ -165,7 +170,7 @@ class UsersController < ApplicationController
          message: "missing or bad user's address country",
          status: 400
        }
-       render :json => payload, :status => 400
+       render :json => payload, :status => payload[:status]
     end
   end
 
