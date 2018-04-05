@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :password, :length => { minimum: 7 }
   validates :mail, uniqueness: true
   validate :check_count_by_state
+  validate :is_addr_valid
   # -----
 
   # Hooks
@@ -67,6 +68,14 @@ class User < ApplicationRecord
     user_count = User.includes(address: {locality: :state}).where(states: {id: state.id}).count
     if user_count >= Rails.application.secrets.max_player_by_state
       errors.add(:base, "Reached the max number of players located in your state")
+    end
+  end
+
+  def is_addr_valid
+    full_addr = self.address.to_string
+    api_result = JT::Rails::Address.search(full_addr, Rails.application.secrets.google_maps_api_key)
+    if !api_result
+      errors.add(:base, "Invalid user's address")
     end
   end
 

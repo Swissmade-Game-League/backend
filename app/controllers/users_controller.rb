@@ -135,7 +135,7 @@ class UsersController < ApplicationController
   end
 
   def check_address
-    if !user_params.has_key?(:address) || !user_params[:address].has_key?(:street) || !user_params[:address].has_key?(:number)
+    if !user_params.has_key?(:address) || !user_params[:address].has_key?(:street)
        payload = {
          message: "missing or bad user's address",
          status: 400
