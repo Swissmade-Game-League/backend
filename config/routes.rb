@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   ## Users
   resources :users
-  post 'authenticate'     => "users#authenticate"
+  post 'authenticate'             => "users#authenticate"
   # -------------
 
   ## Users
@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   # -------------
 
   ## Addresses
-  #resources :addresses, only: [:show]
+  resources :addresses, only: [:show]
+  post 'validate-addr'            => 'addresses#get_valid_addr'
   # -------------
 
   ## Payments

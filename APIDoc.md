@@ -420,3 +420,45 @@
   "status": 200
 }
 ```
+
+# Addresses
+
+## Get valid address from query
+
+**Endpoint**: POST - https://api_endpoint.tld/validate-addr
+
+**Description**: Make a short address query and get a valid address from Google Maps
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "query": "Place du marché, carouge"
+}
+```
+
+#### Response
+```
+{
+  "lat": 46.1842549,
+  "lng": 6.1406975,
+  "formatted_address": "Place du Marché, 1227 Carouge, Switzerland",
+  "street_name": "Place du Marché",
+  "city": "Carouge",
+  "department": "Genève",
+  "department_code": "Genève",
+  "state": "Genève",
+  "state_code": "GE",
+  "country": "Switzerland",
+  "country_code": "CH",
+  "zip_code": "1227",
+  "street": "Place du Marché"
+}
+```
