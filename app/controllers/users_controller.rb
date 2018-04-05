@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params.except(:gender, :address))
-    @user.gender = Gender.find_by(name: user_params[:gender])
+    @user = User.new(user_params.except(:gender_id, :address))
+    @user.gender = Gender.find_by(id: user_params[:gender_id])
     country    = Country.find_or_initialize_by("name" => user_params[:address][:country][:name])
     state     = State.find_or_initialize_by("name" => user_params[:address][:state][:name], "country" => country)
     locality  = Locality.find_or_initialize_by(
@@ -50,9 +50,9 @@ class UsersController < ApplicationController
 
   def update
     old_mail = @user.mail
-    if @user.update_attributes(user_params.except(:gender))
-      if user_params.has_key?(:gender)
-        @user.gender = Gender.find_by(name: user_params[:gender])
+    if @user.update_attributes(user_params.except(:gender_id))
+      if user_params.has_key?(:gender_id)
+        @user.gender = Gender.find_by(id: user_params[:gender_id])
       end
       if user_params.has_key?(:password) && user_params.has_key?(:password_confirmation)
         @user.password = user_params["password"]
@@ -175,7 +175,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :nickname, :mail, :password, :password_confirmation, :birthdate, :token, :gender, :dev, :team_name, :address => [:street, :number, :locality => [:name, :postal_code], :state => [:name], :country => [:name]])
+    params.require(:user).permit(:firstname, :lastname, :nickname, :mail, :password, :password_confirmation, :birthdate, :token, :gender_id, :dev, :team_name, :address => [:street, :number, :locality => [:name, :postal_code], :state => [:name], :country => [:name]])
   end
 
 end

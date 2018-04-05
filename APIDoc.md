@@ -45,7 +45,7 @@
 		"password_confirmation": "this_is_my_sick_password",
 		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
-		"gender": "male",
+		"gender_id": 1,
 		"team_name": null,
 		"dev": false,
 		"address": {
@@ -276,19 +276,19 @@
 [
   {
     "id": 1,
-    "name": "male",
+    "name": "Male",
     "created_at": "2018-03-19T10:24:19.906Z",
     "updated_at": "2018-03-19T10:24:19.906Z"
   },
   {
     "id": 2,
-    "name": "female",
+    "name": "Female",
     "created_at": "2018-03-19T10:24:19.924Z",
     "updated_at": "2018-03-19T10:24:19.924Z"
   },
   {
     "id": 3,
-    "name": "other",
+    "name": "Other",
     "created_at": "2018-03-19T10:24:19.939Z",
     "updated_at": "2018-03-19T10:24:19.939Z"
   }
@@ -308,7 +308,7 @@
 ```
 {
   "id": 2,
-  "name": "female",
+  "name": "Female",
   "created_at": "2018-03-19T10:24:19.924Z",
   "updated_at": "2018-03-19T10:24:19.924Z"
 }
@@ -327,7 +327,7 @@
 ```
 {
   "id": 2,
-  "name": "female",
+  "name": "Female",
   "created_at": "2018-03-19T10:24:19.924Z",
   "updated_at": "2018-03-19T10:24:19.924Z"
 }
