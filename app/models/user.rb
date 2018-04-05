@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :password, :length => { minimum: 7 }
   validates :mail, uniqueness: true
+  validate :check_count_by_state
   # -----
 
   # Hooks
@@ -59,6 +60,14 @@ class User < ApplicationRecord
       return true
     end
     return false
+  end
+
+  def check_count_by_state
+    state = self.address.locality.state
+    user_count = User.includes(address: {locality: :state}).where(states: {id: state.id}).count
+    if user_count >= Rails.application.secrets.max_player_by_state
+      errors.add(:base, "Reached the max number of players located in your state")
+    end
   end
 
 end
