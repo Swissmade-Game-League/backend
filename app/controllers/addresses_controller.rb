@@ -13,14 +13,9 @@ class AddressesController < ApplicationController
   def get_valid_addr
     data = JT::Rails::Address.search(params["query"], Rails.application.secrets.google_maps_api_key)
     if !data
-      payload = {
-        message: "Address not found",
-        status: 404
-      }
-      render json: payload, :status => payload[:status]
-    else
-      render json: data
+      data = {}
     end
+    render json: data
   end
 
   private
