@@ -2,7 +2,7 @@ class Address < ApplicationRecord
   has_many :users
   belongs_to :locality
 
-  validates :locality, presence: true
+  validates :street, :locality, presence: true
 
   def to_string
     locality = self.locality

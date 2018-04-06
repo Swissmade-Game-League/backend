@@ -39,32 +39,42 @@ class PaymentsController < ApplicationController
             customer.source = payment_params[:stripeToken]
             customer.save
           end
-          charge = Stripe::Charge.create(
-            :customer    => customer.id,
-            :amount      => payment.amount.to_i*100,
-            :description => payment.user.firstname.capitalize+" "+"''"+payment.user.nickname+"''"+" "+payment.user.lastname.capitalize,
-            :currency    => 'chf',
-            :metadata    => {
-              "firstname" => payment.user.firstname.capitalize,
-              "lastname" => payment.user.lastname.capitalize,
-              "nickname" => payment.user.nickname,
-            }
-          )
           payment.paid = true
-          payment.gen_token
-          payment.save
-          payload = {
-            message: "You're payment has been validated",
-            payment: payment.as_json,
-            status: 200
-          }
+          if payment.valid?
+            charge = Stripe::Charge.create(
+              :customer    => customer.id,
+              :amount      => payment.amount.to_i*100,
+              :description => payment.user.firstname.capitalize+" "+"''"+payment.user.nickname+"''"+" "+payment.user.lastname.capitalize,
+              :currency    => 'chf',
+              :metadata    => {
+                "firstname" => payment.user.firstname.capitalize,
+                "lastname" => payment.user.lastname.capitalize,
+                "nickname" => payment.user.nickname,
+              }
+            )
+          end
+          if payment.save
+            payload = {
+              message: "You're payment has been validated",
+              payment: payment.as_json,
+              status: 200
+            }
+          else
+            payment.product.payment = nil
+            payload = {
+              message: "Error during the payment process, "+payment.errors.full_messages.to_sentence,
+              status: 400
+            }
+          end
         rescue Stripe::CardError => e
+          payment.product.payment = nil
           payment.destroy
           payload = {
             message: e.message,
             status: 402
           }
         rescue => error
+          payment.product.payment = nil
           payment.destroy
           payload = {
             message: "An error occurred while registering "+error.to_s,
@@ -73,13 +83,18 @@ class PaymentsController < ApplicationController
         end
       else
         payment.paid = false
-        payment.gen_token
-        payment.save
-        payload = {
-          message: "Thanks, your payment is waiting for validation. This process could take some days.",
-          payment: payment.as_json,
-          status: 200
-        }
+        if payment.save
+          payload = {
+            message: "Thanks, your payment is waiting for validation. This process could take some days.",
+            payment: payment.as_json,
+            status: 200
+          }
+        else
+          payload = {
+            message: "Error during the payment process, "+payment.errors.full_messages.to_sentence,
+            status: 400
+          }
+        end
       end
     else
       if payment.get_first_unassigned_product == nil
