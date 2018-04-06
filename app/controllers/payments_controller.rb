@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
           end
           if payment.save
             payload = {
-              message: "You're payment has been validated",
+              message: "Your payment has been validated",
               payment: payment.as_json,
               status: 200
             }
