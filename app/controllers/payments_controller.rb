@@ -67,14 +67,18 @@ class PaymentsController < ApplicationController
             }
           end
         rescue Stripe::CardError => e
-          payment.product.payment = nil
+          if payment.product
+            payment.product.payment = nil
+          end
           payment.destroy
           payload = {
             message: e.message,
             status: 402
           }
         rescue => error
-          payment.product.payment = nil
+          if payment.product
+            payment.product.payment = nil
+          end
           payment.destroy
           payload = {
             message: "An error occurred while registering "+error.to_s,
