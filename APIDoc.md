@@ -46,7 +46,8 @@
 		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
 		"gender_id": 1,
-		"team_name": null,
+		"team_name": "V12",
+		"favorite_game": "Guild Wars",
 		"dev": false,
 		"address": {
 			"number": 4,
@@ -78,7 +79,8 @@
   "created_at": "2018-03-17T15:46:35.000Z",
   "updated_at": "2018-03-17T15:46:35.000Z",
   "gender_id": 1,
-  "team_name": null,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
   "dev": false,
   "address_id": 1
 }
@@ -119,7 +121,8 @@
   "token": "09150c847bcc22765cfc047c",
   "birthdate": "1993-01-19",
   "gender_id": 1,
-  "team_name": null,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
   "dev": false,
   "address_id": 1,
   "created_at": "2018-03-19T07:10:19.161Z",
@@ -145,7 +148,8 @@
     "mail": "email@example.com",
     "birthdate": "1993-01-19",
     "gender_id": 1,
-    "team_name": null,
+    "team_name": "V12",
+    "favorite_game": "Guild Wars",
     "dev": false,
     "address_id": 1,
     "created_at": "2018-03-16T07:11:30.480Z",
@@ -173,7 +177,8 @@
   "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "gender_id": 1,
-  "team_name": null,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
   "dev": false,
   "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
@@ -210,7 +215,8 @@
     "password_confirmation": "this_is_my_new_sick_password",
     "birthdate": "1993-01-19",
     "gender": "male",
-    "team_name": null,
+    "team_name": "V12",
+    "favorite_game": "Guild Wars",
     "dev": false,
     "token": "5cc5e4224c5d0c006eda75fc"
   }
@@ -227,7 +233,8 @@
   "nickname": "CypressXt",
   "birthdate": "1993-01-19",
   "gender_id": 1,
-  "team_name": null,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
   "dev": false,
   "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
@@ -440,25 +447,26 @@
 #### Body
 ```
 {
-  "query": "Place du marché, carouge"
+  "query": "Rue liothard 4"
 }
 ```
 
 #### Response
 ```
 {
-  "lat": 46.1842549,
-  "lng": 6.1406975,
-  "formatted_address": "Place du Marché, 1227 Carouge, Switzerland",
-  "street_name": "Place du Marché",
-  "city": "Carouge",
+  "lat": 46.2094824,
+  "lng": 6.134610899999999,
+  "formatted_address": "Rue Liotard 4, 1202 Genève, Switzerland",
+  "street_number": "4",
+  "street_name": "Rue Liotard",
+  "city": "Genève",
   "department": "Genève",
   "department_code": "Genève",
   "state": "Genève",
   "state_code": "GE",
   "country": "Switzerland",
   "country_code": "CH",
-  "zip_code": "1227",
-  "street": "Place du Marché"
+  "zip_code": "1202",
+  "street": "4 Rue Liotard"
 }
 ```
