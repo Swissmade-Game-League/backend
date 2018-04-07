@@ -65,9 +65,18 @@ class User < ApplicationRecord
 
   def check_count_by_state
     state = self.address.locality.state
-    user_count = User.includes(address: {locality: :state}).where(states: {id: state.id}).count
-    if user_count >= Rails.application.secrets.max_player_by_state
-      errors.add(:base, "Reached the max number of players located in your state")
+    if self.address.locality.state.country == Country.find_by(name: "Switzerland")
+      # Swiss players
+      user_count = User.includes(address: {locality: :state}).where(states: {id: state.id}).count
+      if user_count >= Rails.application.secrets.max_player_by_state
+        errors.add(:base, "Reached the max number of players located in your state")
+      end
+    else
+      # Foreign players
+      user_count = User.includes(address: {locality: {state: :country}}).where.not(countries: {name: "Switzerland"})
+      if user_count >= Rails.application.secrets.max_player_by_state
+        errors.add(:base, "Reached the max number of foreign players located out of Switzerland")
+      end
     end
   end
 
