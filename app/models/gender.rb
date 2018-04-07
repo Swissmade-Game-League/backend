@@ -8,4 +8,8 @@ class Gender < ApplicationRecord
   has_many :users
   # -----
 
+  def as_json(options={})
+    self.name = self.name.capitalize
+    super(options)
+  end
 end

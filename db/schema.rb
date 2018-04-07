@@ -10,12 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319101944) do
+ActiveRecord::Schema.define(version: 20180407000822) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "locality_id"
+    t.index ["locality_id"], name: "index_addresses_on_locality_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "genders", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "localities", force: :cascade do |t|
+    t.string "name"
+    t.integer "postal_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "state_id"
+    t.index ["state_id"], name: "index_localities_on_state_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.float "amount"
+    t.boolean "paid"
+    t.string "token"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "key"
+    t.integer "payment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "price"
+    t.index ["payment_id"], name: "index_products_on_payment_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,6 +80,13 @@ ActiveRecord::Schema.define(version: 20180319101944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "gender_id"
+    t.integer "address_id"
+    t.string "nickname"
+    t.string "remote_id"
+    t.string "team_name"
+    t.boolean "dev", default: false
+    t.string "favorite_game"
+    t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["gender_id"], name: "index_users_on_gender_id"
   end
 

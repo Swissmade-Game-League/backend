@@ -40,11 +40,29 @@
 	"user": {
 		"firstname": "Clément",
 		"lastname": "Hampaï",
+		"nickname": "CypressXt",  
 		"password": "this_is_my_sick_password",
 		"password_confirmation": "this_is_my_sick_password",
 		"mail": "email@example.com",
 		"birthdate": "1993-01-19",
-		"gender": "male"
+		"gender_id": 1,
+		"team_name": "V12",
+		"favorite_game": "Guild Wars",
+		"dev": false,
+		"address": {
+			"number": 4,
+			"street": "rue du tryhard",
+			"locality": {
+				"name": "Genève",
+				"postal_code": "1202"
+			},
+			"state": {
+				"name": "Genève"
+			},
+			"country": {
+				"name": "Switzerland"
+			}
+		}
 	}
 }
 ```
@@ -55,11 +73,16 @@
   "id": 1,
   "firstname": "clément",
   "lastname": "hampaï",
+  "nickname": "CypressXt",
   "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "created_at": "2018-03-17T15:46:35.000Z",
   "updated_at": "2018-03-17T15:46:35.000Z",
-  "gender_id": 1
+  "gender_id": 1,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
+  "dev": false,
+  "address_id": 1
 }
 ```
 
@@ -93,10 +116,15 @@
   "id": 10,
   "firstname": "clément",
   "lastname": "hampaï",
+  "nickname": "CypressXt",
   "mail": "email@example.com",
   "token": "09150c847bcc22765cfc047c",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
+  "dev": false,
+  "address_id": 1,
   "created_at": "2018-03-19T07:10:19.161Z",
   "updated_at": "2018-03-19T07:10:19.161Z"
 }
@@ -116,9 +144,14 @@
     "id": 8,
     "firstname": "clément",
     "lastname": "hampaï",
+    "nickname": "CypressXt",
     "mail": "email@example.com",
     "birthdate": "1993-01-19",
     "gender_id": 1,
+    "team_name": "V12",
+    "favorite_game": "Guild Wars",
+    "dev": false,
+    "address_id": 1,
     "created_at": "2018-03-16T07:11:30.480Z",
     "updated_at": "2018-03-16T07:11:30.480Z"
   }
@@ -140,9 +173,14 @@
   "id": 8,
   "firstname": "clément",
   "lastname": "hampaï",
+  "nickname": "CypressXt",
   "mail": "email@example.com",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
+  "dev": false,
+  "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.480Z"
 }
@@ -171,11 +209,15 @@
   "user": {
     "firstname": "Clément",
     "lastname": "Hampaï",
+    "nickname": "CypressXt",  
     "mail": "email@example.com",
     "password": "this_is_my_new_sick_password",
     "password_confirmation": "this_is_my_new_sick_password",
     "birthdate": "1993-01-19",
     "gender": "male",
+    "team_name": "V12",
+    "favorite_game": "Guild Wars",
+    "dev": false,
     "token": "5cc5e4224c5d0c006eda75fc"
   }
 }
@@ -188,8 +230,13 @@
   "id": 8,
   "firstname": "clément",
   "lastname": "hampaï",
+  "nickname": "CypressXt",
   "birthdate": "1993-01-19",
   "gender_id": 1,
+  "team_name": "V12",
+  "favorite_game": "Guild Wars",
+  "dev": false,
+  "address_id": 1,
   "created_at": "2018-03-16T07:11:30.480Z",
   "updated_at": "2018-03-16T07:11:30.939Z"
 }
@@ -236,19 +283,19 @@
 [
   {
     "id": 1,
-    "name": "male",
+    "name": "Male",
     "created_at": "2018-03-19T10:24:19.906Z",
     "updated_at": "2018-03-19T10:24:19.906Z"
   },
   {
     "id": 2,
-    "name": "female",
+    "name": "Female",
     "created_at": "2018-03-19T10:24:19.924Z",
     "updated_at": "2018-03-19T10:24:19.924Z"
   },
   {
     "id": 3,
-    "name": "other",
+    "name": "Other",
     "created_at": "2018-03-19T10:24:19.939Z",
     "updated_at": "2018-03-19T10:24:19.939Z"
   }
@@ -268,7 +315,7 @@
 ```
 {
   "id": 2,
-  "name": "female",
+  "name": "Female",
   "created_at": "2018-03-19T10:24:19.924Z",
   "updated_at": "2018-03-19T10:24:19.924Z"
 }
@@ -287,8 +334,139 @@
 ```
 {
   "id": 2,
-  "name": "female",
+  "name": "Female",
   "created_at": "2018-03-19T10:24:19.924Z",
   "updated_at": "2018-03-19T10:24:19.924Z"
+}
+```
+
+# Payments
+
+## Create a cash payment
+
+**Endpoint**: POST - https://api_endpoint.tld/payments
+
+**Description**: Create a new cash payment
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "payment": {
+    "user_id": "13",
+    "user_token": "1850bd1654a7291292873946",
+    "amount": "12"
+  }
+}
+```
+
+#### Response
+```
+{
+  "message": "Thanks, your payment is waiting for validation. This process could take some days.",
+  "payment": {
+    "id": 9,
+    "amount": 12.0,
+    "paid": false,
+    "token": "ed7f8d69756af97ef99ce29bc468b7fde200dfb2dcb114eb",
+    "user_id": 13,
+    "created_at": "2018-04-03T22:15:30.900Z",
+    "updated_at": "2018-04-03T22:15:30.923Z"
+  },
+  "status": 200
+}
+```
+
+
+## Create a credit card payment
+
+**Endpoint**: POST - https://api_endpoint.tld/payments
+
+**Description**: Create a new cash payment
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "payment": {
+    "user_id": "13",
+    "user_token": "1850bd1654a7291292873946",
+    "amount": "12",
+    "stripeToken": "tok_1CCxaRLZISEaaGqL0Vgy12AF"
+  }
+}
+```
+
+#### Response
+```
+{
+  "message": "You're payment has been validated",
+  "payment": {
+    "id": 18,
+    "amount": 12.0,
+    "paid": true,
+    "token": "7bc3b8d7c59f7a9888b209f796e6e3e09ffe17977145e0e7",
+    "user_id": 13,
+    "created_at": "2018-04-03T22:37:04.188Z",
+    "updated_at": "2018-04-03T22:37:08.125Z"
+  },
+  "status": 200
+}
+```
+
+# Addresses
+
+## Get valid address from query
+
+**Endpoint**: POST - https://api_endpoint.tld/validate-addr
+
+**Description**: Make a short address query and get a valid address from Google Maps
+
+#### Header
+```
+{
+	Content-Type: application/json; charset=utf-8
+}
+```
+
+
+#### Body
+```
+{
+  "query": "Rue liothard 4"
+}
+```
+
+#### Response
+```
+{
+  "lat": 46.2094824,
+  "lng": 6.134610899999999,
+  "formatted_address": "Rue Liotard 4, 1202 Genève, Switzerland",
+  "street_number": "4",
+  "street_name": "Rue Liotard",
+  "city": "Genève",
+  "department": "Genève",
+  "department_code": "Genève",
+  "state": "Genève",
+  "state_code": "GE",
+  "country": "Switzerland",
+  "country_code": "CH",
+  "zip_code": "1202",
+  "street": "4 Rue Liotard"
 }
 ```

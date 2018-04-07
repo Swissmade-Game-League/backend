@@ -18,14 +18,14 @@ class GendersController < ApplicationController
     @gender = Gender.find_by(id: params[:id]) || Gender.find_by(name: params[:name])
     if !@gender
       payload = {
-        error: "Gender not found",
+        message: "Gender not found",
         status: 404
       }
       render :json => payload, :status => 404
     end
   end
 
-  def user_params
+  def gender_params
     params.require(:gender).permit(:name)
   end
 
