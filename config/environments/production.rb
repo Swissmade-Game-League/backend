@@ -80,4 +80,19 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { :host => 'https://api.smgl.ch' }
+  config.action_controller.default_url_options = { :host => 'https://api.smgl.ch' }
+  config.action_controller.asset_host = "https://api.smgl.ch"
+  config.action_mailer.asset_host = "https://api.smgl.ch"
+  config.action_mailer.smtp_settings = {
+    :address                => Rails.application.secrets.mail_smtp_srv,
+    :port                   => Rails.application.secrets.mail_smtp_port,
+    :user_name              => Rails.application.secrets.mail_user,
+    :password               => Rails.application.secrets.mail_user_pwd,
+    :domain                 => Rails.application.secrets.mail_domain,
+    :authentication         => 'plain',
+    :enable_starttls_auto   => true
+  }
+
 end
