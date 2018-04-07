@@ -73,7 +73,7 @@ class User < ApplicationRecord
       end
     else
       # Foreign players
-      user_count = User.includes(address: {locality: {state: :country}}).where.not(countries: {name: "Switzerland"})
+      user_count = User.includes(address: {locality: {state: :country}}).where.not(countries: {name: "Switzerland"}).count
       if user_count >= Rails.application.secrets.max_player_by_state
         errors.add(:base, "Reached the max number of foreign players located out of Switzerland")
       end
