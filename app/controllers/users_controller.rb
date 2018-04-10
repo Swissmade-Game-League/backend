@@ -105,7 +105,7 @@ class UsersController < ApplicationController
     else
       payload = {
         message: "Wrong user's credentials",
-        status: 400
+        status: 403
       }
       render :json => payload, :status => payload[:status]
     end

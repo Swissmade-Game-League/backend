@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :gender, :address, presence: true
   validates :password, confirmation: true
   validates :password, :length => { minimum: 7 }
-  validates :mail, uniqueness: true
+  validates :mail, :nickname, uniqueness: true
   validate :check_count_by_state
   validate :is_addr_valid
   # -----
@@ -47,6 +47,9 @@ class User < ApplicationRecord
   end
 
   def encrypt_password(password)
+    if !password
+      password = ""
+    end
     return Digest::SHA2.new(512).hexdigest(password+self.salt)
   end
 
