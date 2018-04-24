@@ -25,6 +25,8 @@ class GendersController < ApplicationController
     end
   end
 
+  private
+
   def gender_params
     params.require(:gender).permit(:name)
   end

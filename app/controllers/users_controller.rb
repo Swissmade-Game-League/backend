@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :user_must_exist, except: [:index, :create]
   before_action :users_token_must_be_valid, only: [:update, :destroy]
   before_action :check_address, :check_locality, :check_state, :check_country, only: [:create]
+  rescue_from ActionController::ParameterMissing, :with => :param_missing_error
 
   def index
     #users = User.all
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-   render :json => @user , :except => [:password, :token, :salt]
+    render :json => @user , :except => [:password, :token, :salt]
   end
 
   def create
@@ -23,15 +24,15 @@ class UsersController < ApplicationController
     country    = Country.find_or_initialize_by("name" => user_params[:address][:country][:name])
     state     = State.find_or_initialize_by("name" => user_params[:address][:state][:name], "country" => country)
     locality  = Locality.find_or_initialize_by(
-                                                "name" =>user_params[:address][:locality][:name],
-                                                "postal_code" => user_params[:address][:locality][:postal_code],
-                                                "state" => state
-                                              )
+      "name" =>user_params[:address][:locality][:name],
+      "postal_code" => user_params[:address][:locality][:postal_code],
+      "state" => state
+    )
     address   = Address.find_or_initialize_by(
-                                                "street" =>user_params[:address][:street],
-                                                "number"=>user_params[:address][:number],
-                                                "locality"=>locality
-                                              )
+      "street" =>user_params[:address][:street],
+      "number"=>user_params[:address][:number],
+      "locality"=>locality
+    )
     state.country = country
     locality.state = state
     address.locality = locality
@@ -136,46 +137,54 @@ class UsersController < ApplicationController
 
   def check_address
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:street)
-       payload = {
-         message: "missing or bad user's address",
-         status: 400
-       }
-       render :json => payload, :status => payload[:status]
+      payload = {
+        message: "missing or bad user's address",
+        status: 400
+      }
+      render :json => payload, :status => payload[:status]
     end
   end
 
   def check_locality
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:locality) || !user_params[:address][:locality].has_key?(:name) || !user_params[:address][:locality].has_key?(:postal_code)
-       payload = {
-         message: "missing or bad user's address locality",
-         status: 400
-       }
-       render :json => payload, :status => payload[:status]
+      payload = {
+        message: "missing or bad user's address locality",
+        status: 400
+      }
+      render :json => payload, :status => payload[:status]
     end
   end
 
   def check_state
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:state) || !user_params[:address][:state].has_key?(:name)
-       payload = {
-         message: "missing or bad user's address state",
-         status: 400
-       }
-       render :json => payload, :status => payload[:status]
+      payload = {
+        message: "missing or bad user's address state",
+        status: 400
+      }
+      render :json => payload, :status => payload[:status]
     end
   end
 
   def check_country
     if !user_params.has_key?(:address) || !user_params[:address].has_key?(:country) || !user_params[:address][:country].has_key?(:name)
-       payload = {
-         message: "missing or bad user's address country",
-         status: 400
-       }
-       render :json => payload, :status => payload[:status]
+      payload = {
+        message: "missing or bad user's address country",
+        status: 400
+      }
+      render :json => payload, :status => payload[:status]
     end
   end
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :nickname, :mail, :password, :password_confirmation, :birthdate, :token, :gender_id, :favorite_game, :dev, :team_name, :address => [:street, :number, :locality => [:name, :postal_code], :state => [:name], :country => [:name]])
+  end
+
+  def param_missing_error
+    payload = {
+      message: "missing or bad user's params",
+      status: 400
+    }
+    render :json => payload, :status => payload[:status]
   end
 
 end
