@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180407000822) do
+ActiveRecord::Schema.define(version: 20180424052455) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180407000822) do
     t.string "team_name"
     t.boolean "dev", default: false
     t.string "favorite_game"
+    t.boolean "admin", default: false
     t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["gender_id"], name: "index_users_on_gender_id"
   end

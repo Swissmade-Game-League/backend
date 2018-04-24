@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
   before_action :user_must_exist, except: [:index, :create]
   before_action :users_token_must_be_valid, only: [:update, :destroy]
+  before_action :must_be_admin, only: [:index]
   before_action :check_address, :check_locality, :check_state, :check_country, only: [:create]
   rescue_from ActionController::ParameterMissing, :with => :param_missing_error
 
   def index
-    #users = User.all
-    #render json: users, :except => [:password, :token, :salt]
-    payload = {
-      message: "Temporarily disabled, brb soon",
-      status: 503
-    }
-    render :json => payload, :status => payload[:status]
+    users = User.all
+    render json: users, :except => [:password, :token, :salt]
   end
 
   def show
@@ -177,6 +173,23 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :nickname, :mail, :password, :password_confirmation, :birthdate, :token, :gender_id, :favorite_game, :dev, :team_name, :address => [:street, :number, :locality => [:name, :postal_code], :state => [:name], :country => [:name]])
+  end
+
+  def must_be_admin
+    @user = User.find_by(id: params[:token])
+    if @user && !@user.admin
+      payload = {
+        message: "You don't have the authorization to access this resource.",
+        status: 403
+      }
+      render :json => payload, :status => payload[:status]
+    elsif !@user
+      payload = {
+        message: "Wrong user's credentials, check the user's token using the authenticate method.",
+        status: 403
+      }
+      render :json => payload, :status => payload[:status]
+    end
   end
 
   def param_missing_error
