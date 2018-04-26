@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_must_exist, except: [:index, :create]
+  before_action :user_must_exist, except: [:index, :ladder, :create]
   before_action :users_token_must_be_valid, only: [:update, :destroy]
   before_action :must_be_admin, only: [:index]
   before_action :check_address, :check_locality, :check_state, :check_country, only: [:create]
@@ -12,6 +12,25 @@ class UsersController < ApplicationController
 
   def show
     render :json => @user , :except => [:password, :token, :salt]
+  end
+
+  def ladder
+    users = User.joins(:payments).where(:payments => {:paid => true}).group(:user)
+    render json: users, :except => [:password, :token, :salt, :gender_id, :address_id, :remote_id, :admin],
+    :include => {
+      :address => { :only => [:locality],
+        :include => {
+          :locality => {
+            :include => {
+              :state => {
+                :include => :country
+              }
+            }
+          }
+        }
+      },
+      :gender => {}
+    }
   end
 
   def create
