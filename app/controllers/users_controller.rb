@@ -209,7 +209,7 @@ class UsersController < ApplicationController
   end
 
   def must_be_admin
-    @user = User.find_by(id: params[:token])
+    @user = User.find_by(token: params[:token])
     if @user && !@user.admin
       payload = {
         message: "You don't have the authorization to access this resource.",
