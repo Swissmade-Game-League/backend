@@ -470,3 +470,61 @@
   "street": "4 Rue Liotard"
 }
 ```
+
+# Ladder
+
+## Get the ladder
+
+**Endpoint**: GET - https://api_endpoint.tld/ladder/
+
+**Description**: Get all competitive players ranked by ladder points
+
+**Still in development, ladder points are not available yet**
+
+#### Response
+```
+[
+  {
+    "id": 1,
+    "firstname": "clément",
+    "lastname": "hampaï",
+    "mail": "clement.hampai@cypressxt.net",
+    "birthdate": "1993-01-19",
+    "created_at": "2018-04-05T22:42:08.741Z",
+    "updated_at": "2018-04-24T05:53:17.953Z",
+    "nickname": "CypressXt",
+    "team_name": "V_12",
+    "dev": false,
+    "favorite_game": null,
+    "address": {
+      "locality": {
+        "id": 5,
+        "name": "Carouge",
+        "postal_code": 1227,
+        "created_at": "2018-04-05T22:42:07.705Z",
+        "updated_at": "2018-04-05T22:42:07.705Z",
+        "state_id": 1,
+        "state": {
+          "id": 1,
+          "name": "Genève",
+          "created_at": "2018-04-02T17:48:06.740Z",
+          "updated_at": "2018-04-02T18:25:57.932Z",
+          "country_id": 2,
+          "country": {
+            "id": 2,
+            "name": "Switzerland",
+            "created_at": "2018-04-02T18:25:57.918Z",
+            "updated_at": "2018-04-02T18:25:57.918Z"
+          }
+        }
+      }
+    },
+    "gender": {
+      "id": 1,
+      "name": "male",
+      "created_at": "2018-04-02T17:13:38.684Z",
+      "updated_at": "2018-04-02T17:13:38.684Z"
+    }
+  }
+]
+```
