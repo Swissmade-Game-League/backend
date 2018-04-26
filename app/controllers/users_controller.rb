@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def ladder
-    users = User.joins(:payments).where(:payments => {:paid => true}).group(:user)
+    users = User.distinct.joins(:payments).where(:payments => {:paid => true})
     render json: users, :except => [:password, :token, :salt, :gender_id, :address_id, :remote_id, :admin],
     :include => {
       :address => { :only => [:locality],
