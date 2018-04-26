@@ -7,7 +7,21 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users, :except => [:password, :token, :salt]
+    render json: users, :except => [:password, :token, :salt],
+    :include => {
+      :address => { :only => [:locality],
+        :include => {
+          :locality => {
+            :include => {
+              :state => {
+                :include => :country
+              }
+            }
+          }
+        }
+      },
+      :gender => {}
+    }
   end
 
   def show
@@ -16,7 +30,7 @@ class UsersController < ApplicationController
 
   def ladder
     users = User.distinct.joins(:payments).where(:payments => {:paid => true})
-    render json: users, :except => [:password, :token, :salt, :gender_id, :address_id, :remote_id, :admin],
+    render json: users, :except => [:mail, :password, :token, :salt, :gender_id, :address_id, :remote_id, :admin],
     :include => {
       :address => { :only => [:locality],
         :include => {
