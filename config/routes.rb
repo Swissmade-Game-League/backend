@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   ## Users
   resources :users
+  get 'ladder'                    => "users#ladder"
   post 'authenticate'             => "users#authenticate"
   # -------------
 

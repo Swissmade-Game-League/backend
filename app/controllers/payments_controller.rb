@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :user_must_exist, :user_must_be_authent
+  rescue_from ActionController::ParameterMissing, :with => :param_missing_error
+
 
   def create
     payment = Payment.new
@@ -141,6 +143,14 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:user_id, :user_token, :amount, :stripeToken, :stripeEmail)
+  end
+
+  def param_missing_error
+    payload = {
+      message: "missing or bad payment's params",
+      status: 400
+    }
+    render :json => payload, :status => payload[:status]
   end
 
 end
