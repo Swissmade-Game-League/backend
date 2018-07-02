@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :password, :length => { minimum: 7 }
   validates :mail, :nickname, uniqueness: true
-  validate :check_count_by_state
+  ## States limits deactivated !
+  # validate :check_count_by_state
   validate :is_addr_valid
   # -----
 
