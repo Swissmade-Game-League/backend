@@ -87,8 +87,9 @@ class User < ApplicationRecord
 
   def is_addr_valid
     full_addr = self.address.to_string
-    api_result = JT::Rails::Address.search(full_addr, Rails.application.secrets.google_maps_api_key)
-    if !api_result
+    geocoder = Graticule.service(:google).new Rails.application.secrets.google_maps_api_key
+    api_result = geocoder.locate(full_addr)
+    if !api_result || api_result.precision == :unknown
       errors.add(:base, "Invalid user's address")
     end
   end
