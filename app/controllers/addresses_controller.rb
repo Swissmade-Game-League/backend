@@ -11,7 +11,8 @@ class AddressesController < ApplicationController
   end
 
   def get_valid_addr
-    data = JT::Rails::Address.search(params["query"], Rails.application.secrets.google_maps_api_key)
+    geocoder = Graticule.service(:google).new Rails.application.secrets.google_maps_api_key
+    data = geocoder.locate(params["query"])
     if !data
       data = {}
     end
